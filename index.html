@@ -3,12 +3,45 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | pookiebottle</title>
+    <title>pookiebottle 🩷</title>
   </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0; overflow: hidden;">
+  <body style="text-align: center; padding: 0; border: 0; margin: 0; overflow: hidden; background-color: #000; color: #fff; font-size: 32px;">
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 100vw; height: 100vh; background: #231F20"></canvas>
-    <script src="Build/out.loader.js"></script>
+
+    <div
+      id="progress-bar-wrapper"
+      style="position: fixed; width: 100vw; height: 100vh; left: 0; top: 0; justify-content: center; align-content: center; overflow: hidden; transition: all 0.5s"
+    >
+      <p
+        id="progress-bar"
+        style="font-family: monospace; font-size: 36px; overflow: hidden; white-space: nowrap; color: #fec6e6"
+      >
+      </p>
+    </div>
+
+    <script src="bols.mjs" type="module"></script>
+    <script src="Build/out-new-new.loader.js"></script>
     <script>
+      document.querySelector("#progress-bar").innerText = 'プーキーボトル'.repeat(50);
+
+      class JSGameControlIer {
+        #unityInstance = null;
+
+        constructor(unityInstance) {
+          this.#unityInstance = unityInstance;
+          setTimeout(() => { this.spawnBalls(BOLS.length) }, 1000);
+        }
+
+        spawnBalls(count) {
+          this.#unityInstance.SendMessage('bolSpawnPoint', 'SpawnBalls', count);
+        }
+      }
+
+      function updateProgressBar(percentage) {
+        document.querySelector("#progress-bar-wrapper").style.maxWidth = `${percentage * 100}%`;
+        if(percentage === 1) document.querySelector("#progress-bar-wrapper").remove();
+      }
+
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
@@ -26,15 +59,19 @@
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
         arguments: [],
-        dataUrl: "Build/out.data",
-        frameworkUrl: "Build/out.framework.js",
-        codeUrl: "Build/out.wasm",
+        dataUrl: "Build/out-new-new.data",
+        frameworkUrl: "Build/out-new-new.framework.js",
+        codeUrl: "Build/out-new-new.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
+        companyName: "yunopilled",
         productName: "pookiebottle",
-        productVersion: "0.1.0",
+        productVersion: "0.1.1",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      },
+      (progress) => { updateProgressBar(progress); })
+      .then(unityInstance => {
+        window.Game = new JSGameController(unityInstance);
       });
     </script>
   </body>
