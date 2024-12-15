@@ -20,11 +20,11 @@
     </div>
 
     <script src="bols.mjs" type="module"></script>
-    <script src="Build/out-new-new.loader.js"></script>
+    <script src="Build/out.loader.js"></script>
     <script>
       document.querySelector("#progress-bar").innerText = 'プーキーボトル'.repeat(50);
 
-      class JSGameControlIer {
+      class JSGameController {
         #unityInstance = null;
 
         constructor(unityInstance) {
@@ -59,13 +59,13 @@
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
         arguments: [],
-        dataUrl: "Build/out-new-new.data",
-        frameworkUrl: "Build/out-new-new.framework.js",
-        codeUrl: "Build/out-new-new.wasm",
+        dataUrl: "Build/out.data",
+        frameworkUrl: "Build/out.framework.js",
+        codeUrl: "Build/out.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "yunopilled",
         productName: "pookiebottle",
-        productVersion: "0.1.1",
+        productVersion: "0.1.2",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       },
