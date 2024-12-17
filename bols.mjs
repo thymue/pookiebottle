@@ -1,4 +1,5 @@
 class Bol {};
+class BigBol {};
 window.BOLS = [
   Bol,
   Bol,
@@ -24,6 +25,6 @@ window.BOLS = [
   Bol,
   Bol,
   Bol,
-  Bol,
+  BigBol,
   Bol,
 ];
