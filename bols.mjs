@@ -27,4 +27,6 @@ window.BOLS = [
   Bol,
   BigBol,
   Bol,
+  BigBol,
+  Bol,
 ];
