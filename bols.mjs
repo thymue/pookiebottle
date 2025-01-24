@@ -56,4 +56,12 @@ window.BOLS = [
   Bol,
   Bol,
   Bol,
+  Bol,
+  Bol,
+  Bol,
+  Bol,
+  Bol,
+  Bol,
+  Bol,
+  Bol,
 ];
